@@ -12,11 +12,13 @@ Projeto desenvolvido para a disciplina **Programação para a Web II**, do curso
 
 ## Documentação
 
-O escopo completo do projeto está no PDF original ([docs/Projeto SpendWise.pdf](docs/Projeto%20SpendWise.pdf)). Documentação derivada:
+O escopo completo do projeto está no PDF original ([docs/projeto-spendwise.pdf](docs/projeto-spendwise.pdf)). Documentação derivada:
 
-- [Requisitos funcionais e não funcionais](docs/Requisitos-SpendWise.pdf) — RF01–RF14 e RNF01–RNF09
-- [Checklist de casos de uso](docs/checklist-ucs.md) — UC01–UC09 e UC20–UC24 detalhados, com responsável e status de cada um
-- [Dicionário de dados](docs/db/dicionario-dados.md) — inclui os modelos ER e lógico do banco
+- [Requisitos funcionais e não funcionais](docs/requisitos-spendwise.pdf) — RF01–RF14 e RNF01–RNF09
+- Checklist de casos de uso, com responsável e status de cada um:
+  - [Etapa I](docs/etapa1/checklist-ucs-etapa1.md) — UC21, UC20 e UC01–UC06
+  - [Etapa II](docs/etapa2/checklist-ucs-etapa2.md) — UC23, UC22, UC24 e UC07–UC09
+- [Dicionário de dados](db/docs/dicionario-dados.md) — inclui os modelos ER e lógico do banco
 
 ## Estrutura do repositório
 
