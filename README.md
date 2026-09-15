@@ -18,15 +18,14 @@ O escopo completo do projeto está no PDF original ([docs/projeto-spendwise.pdf]
 - Checklist de casos de uso, com responsável e status de cada um:
   - [Etapa I](docs/etapa1/checklist-ucs-etapa1.md) — UC21, UC20 e UC01–UC06
   - [Etapa II](docs/etapa2/checklist-ucs-etapa2.md) — UC23, UC22, UC24 e UC07–UC09
-- [Dicionário de dados](db/docs/dicionario-dados.md) — inclui os modelos ER e lógico do banco
+- [Dicionário de dados](docs/db/dicionario-dados.md) — inclui os modelos ER e lógico do banco
 
 ## Estrutura do repositório
 
 ```text
 .
-├── backend/    # aplicação Java/Groovy (Gradle)
-├── frontend/   
-├── docs/       # documentação do projeto
+├── app/        # aplicação Java (Gradle), monolito com views Thymeleaf
+├── docs/       # documentação do projeto e do banco de dados
 └── docker-compose.yml
 ```
 
@@ -35,7 +34,7 @@ O escopo completo do projeto está no PDF original ([docs/projeto-spendwise.pdf]
 ### Estruturas Gradle
 
 ```bash
-cd backend
+cd app
 ./gradlew build
 ./gradlew run
 ```

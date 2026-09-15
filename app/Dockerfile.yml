@@ -1,17 +1,16 @@
 FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
 
-COPY gradlew settings.gradle gradle.properties ./
+COPY gradlew settings.gradle gradle.properties build.gradle ./
 COPY gradle gradle
-COPY app/build.gradle app/build.gradle
 RUN chmod +x gradlew
 
-COPY app/src app/src
-RUN ./gradlew :app:installDist --no-daemon
+COPY src src
+RUN ./gradlew installDist --no-daemon
 
 FROM eclipse-temurin:21-jre AS runtime
 WORKDIR /app
 
-COPY --from=build /app/app/build/install/app ./
+COPY --from=build /app/build/install/app ./
 
 ENTRYPOINT ["./bin/app"]

@@ -1,6 +1,6 @@
 # Dicionário de Dados — SpendWise
 
-Descrição detalhada de cada tabela e coluna do [modelo lógico](./modelo-logico.png), com o significado de negócio de cada campo conforme [`projeto-spendwise.pdf`](../../docs/projeto-spendwise.pdf).
+Descrição detalhada de cada tabela e coluna do [modelo lógico](./modelo-logico.png), com o significado de negócio de cada campo conforme [`projeto-spendwise.pdf`](../projeto-spendwise.pdf).
 
 ## correntistas
 

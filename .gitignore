@@ -6,34 +6,17 @@
 *.key
 *.p12
 *.jks
-!backend/gradle/wrapper/*.jar
+!app/gradle/wrapper/*.jar
 
-### Java / Gradle (backend) ###
-backend/**/build/
-backend/**/.gradle/
-backend/**/out/
-!backend/gradle/wrapper/gradle-wrapper.jar
+### Java / Gradle (app) ###
+app/**/build/
+app/**/.gradle/
+app/**/out/
+!app/gradle/wrapper/gradle-wrapper.jar
 *.class
 *.jar
 !gradle-wrapper.jar
 HELP.md
-
-### Node / frontend ###
-frontend/node_modules/
-frontend/dist/
-frontend/build/
-frontend/.next/
-frontend/.nuxt/
-frontend/out/
-frontend/coverage/
-frontend/.turbo/
-frontend/.cache/
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-.pnpm-store/
 
 ### Docker ###
 docker-compose.override.yml
