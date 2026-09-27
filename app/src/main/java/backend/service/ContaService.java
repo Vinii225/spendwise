@@ -1,5 +1,6 @@
 package backend.service;
 
+import org.springframework.stereotype.Service;
 import backend.dto.ContaForm;
 import backend.model.Conta;
 import backend.model.Correntista;
@@ -7,6 +8,7 @@ import backend.model.TipoConta;
 import backend.repository.ContaRepository;
 import backend.repository.CorrentistaRepository;
 
+@Service
 public class ContaService {
 
     private final ContaRepository contaRepository;
@@ -26,6 +28,7 @@ public class ContaService {
         Conta conta = new Conta();
         conta.setNumero(form.getNumero());
         conta.setDescricao(form.getDescricao());
+        conta.setTipo(form.getTipo());
         conta.setDiaFechamento(form.getDiaFechamento());
         conta.setCorrentista(correntista);
     
