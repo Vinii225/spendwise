@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:18-alpine
+    environment:
+      POSTGRES_DB: spendwise
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: "12345"
+    ports:
+      - "8082:5432"
+    volumes:
+      - spendwise_pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d spendwise"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile.yml
+    labels:
+      org.springframework.boot.ignore: true
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/spendwise
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: "12345"
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  spendwise_pgdata:
