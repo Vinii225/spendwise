@@ -36,7 +36,7 @@ public class Conta {
     @Column(nullable = false, length = 10)
     private TipoConta tipo;
 
-    /** Preenchido somente quando {@code tipo == CARTAO}. */
+    // Info: preenchido apenas quando a conta é do tipo cartão.
     @Column(name = "dia_fechamento")
     private Integer diaFechamento;
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Nova conta</title>
+</head>
+<body>
+    <h1>Criar conta</h1>
+
+    <p th:if="${sucesso}" th:text="${sucesso}"></p>
+    <p th:if="${erro}" th:text="${erro}" style="color:red"></p>
+
+    <form th:action="@{/contas}" th:object="${contaForm}" method="post">
+        <label for="correntistaId">Correntista</label>
+        <select id="correntistaId" th:field="*{correntistaId}">
+            <option th:each="c : ${correntistas}" th:value="${c.id}" th:text="${c.nome}"></option>
+        </select>
+
+        <label for="numero">Número</label>
+        <input id="numero" type="text" th:field="*{numero}" />
+
+        <label for="descricao">Descrição</label>
+        <input id="descricao" type="text" th:field="*{descricao}" />
+
+        <label for="tipo">Tipo</label>
+        <select id="tipo" th:field="*{tipo}">
+            <option th:each="t:${tipos}" th:value="${t}" th:text="${t}"></option>
+        </select>
+
+        <label for="diaFechamento">Dia de fechamento (só para cartão)</label>
+        <input id="diaFechamento" type="number" th:field="*{diaFechamento}" />
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

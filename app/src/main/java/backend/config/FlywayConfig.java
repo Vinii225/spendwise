@@ -7,12 +7,6 @@ import org.springframework.boot.jpa.autoconfigure.EntityManagerFactoryDependsOnP
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * O Spring Boot 4.1 não traz mais autoconfiguração automática do Flyway,
- * então as migrations são disparadas manualmente aqui, garantindo (via
- * EntityManagerFactoryDependsOnPostProcessor) que rodem antes do Hibernate
- * validar o schema.
- */
 @Configuration
 public class FlywayConfig {
 

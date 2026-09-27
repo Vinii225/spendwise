@@ -5,10 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-/**
- * Libera tudo temporariamente: ainda não existe UC de login/autenticação
- * implementado. Substituir quando esse card for feito.
- */
+// Info: ainda ñ tem Spring Security, isso libera a entrada
 @Configuration
 public class SecurityConfig {
 
