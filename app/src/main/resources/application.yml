@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:8082/spendwise
+    username: spendwise
+    password: 12345
+  jpa:
+    hibernate:
+      ddl-auto: validate
