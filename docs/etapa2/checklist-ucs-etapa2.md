@@ -14,6 +14,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** nenhum — não há nenhuma referência a "extrato" no código-fonte.
+>
 > **Pré-condição**
 >
 > A conta deve existir e possuir transações.
@@ -43,6 +45,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** nenhum — não há nenhuma referência a "orçamento"/"orcamento" no código-fonte.
+>
 > **Pré-condição**
 >
 > A conta deve existir e possuir transações em pelo menos 1 dos meses do ano.
@@ -67,6 +71,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** nenhum — não há código de gráfico no repositório, e depende do UC08 (não implementado).
+>
 > **Pré-condição**
 >
 > A conta deve existir e possuir transações em pelo menos 1 dos meses do ano.
@@ -95,6 +101,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** parcial — `Categoria.java` (entidade) e `CategoriaRepository.java` existem, mas não há `CategoriaController`, service nem template.
+>
 > **Pré-condição**
 >
 > Nenhuma.
@@ -117,6 +125,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** parcial — mesma base do UC22 (`Categoria.java`, `CategoriaRepository.java`); nenhum controller/service/template de categoria implementado.
+>
 > **Pré-condição**
 >
 > Para modificação, a categoria deve existir.
@@ -148,8 +158,12 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [ ] Concluído — Responsável: Vinícius Ares (campo no model) / Athena22 (uso do campo) (parcial)
 
+> **Arquivos:** `Correntista.java` (campo `bloqueado`, commit `108ddbe`, Vinícius Ares), `CorrentistaService.java` (`autenticar` impede login de bloqueado) e `templates/correntista/list.html` (exibe o status, somente leitura) — ambos do commit `571b00f`, Athena22.
+>
+> Falta: nenhuma ação em `CorrentistaController`/`CorrentistaService` para o administrador efetivamente bloquear/desbloquear — só existe a leitura do campo.
+>
 > **Pré-condição**
 >
 > Correntista deve existir.

@@ -12,8 +12,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Vinícius Ares
 
+> **Arquivos:** `Conta.java`, `TipoConta.java`, `ContaController.java` (form/criar, `/contas`), `ContaService.java` (`criar` + `validarDiaFechamento`), `ContaForm.java`, `templates/conta/form.html` — commits `f955438`, `cc581ac`, `1ed855d`. Confere com a issue #10 do board ("UC01 — Correntista cadastra conta"), que define o escopo como criar conta corrente/cartão (RNF 04 — `dia_fechamento` obrigatório só para CARTAO).
+>
 > **Pré-condição**
 >
 > Correntista não tem conta criada.
@@ -38,6 +40,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** nenhum — `ContaController.java` só tem `GET /contas/nova` e `POST /contas` (criação); `ContaRepository.java` sem métodos de busca; não há endpoint de listagem nem template além de `conta/form.html`.
+>
 > **Pré-condição**
 >
 > O administrador criou conta(s) para o usuário.
@@ -60,6 +64,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** nenhum — `Transacao.java` (entidade) e `TransacaoRepository.java` existem, mas não há `TransacaoController`, service nem template.
+>
 > **Pré-condição**
 >
 > Conta existente e correntista não bloqueado.
@@ -84,6 +90,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** nenhum — depende da mesma infraestrutura de transações do UC03, ainda não implementada.
+>
 > **Pré-condição**
 >
 > Existir transações na conta.
@@ -109,6 +117,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** nenhum — `Comentario.java` (entidade) e `ComentarioRepository.java` existem, mas não há controller, service nem template.
+>
 > **Pré-condição**
 >
 > Existir transações na conta.
@@ -134,6 +144,8 @@
 
 - [ ] Concluído — Responsável: ____________
 
+> **Arquivos:** nenhum — mesma limitação do UC05 (sem controller/service/template de comentário).
+>
 > **Pré-condição**
 >
 > Comentário existe para uma transação.
@@ -160,8 +172,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Athena22
 
+> **Arquivos:** `CorrentistaController.java` (`listar`, GET `/correntistas`), `CorrentistaService.java` (`listarTodos`), `templates/correntista/list.html`, `AuthInterceptor.java` (restringe acesso a ADMINISTRADOR)
+>
 > **Pré-condição**
 >
 > Estar autenticado no sistema (login).
@@ -178,8 +192,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Athena22
 
+> **Arquivos:** `CorrentistaController.java` (form/criar, `/correntistas/nova`), `CorrentistaService.java` (criar), `CorrentistaForm.java`, `templates/correntista/form.html`
+>
 > **Pré-condição**
 >
 > Nenhuma.
