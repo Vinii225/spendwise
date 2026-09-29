@@ -12,8 +12,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Vinícius Ares
 
+> **Arquivos:** `Conta.java`, `TipoConta.java`, `ContaController.java` (form/criar, `/contas`), `ContaService.java` (`criar` + `validarDiaFechamento`), `ContaForm.java`, `templates/conta/form.html` — commits `f955438`, `cc581ac`, `1ed855d`. Confere com a issue #10 do board ("UC01 — Correntista cadastra conta"), que define o escopo como criar conta corrente/cartão (RNF 04 — `dia_fechamento` obrigatório só para CARTAO).
+>
 > **Pré-condição**
 >
 > Correntista não tem conta criada.
@@ -36,8 +38,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
+> **Arquivos:** `ContaExtratoController.java` (`listarContas`, GET `/contas`, com paginação), `templates/conta/list.html`.
+>
 > **Pré-condição**
 >
 > O administrador criou conta(s) para o usuário.
@@ -58,8 +62,10 @@
 
 `15 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
+> **Arquivos:** `TransacaoCriacaoController.java` (GET `/transacoes/nova`, POST `/transacoes`), `TransacaoService.java` (`criar`), `templates/transacao/nova.html`.
+>
 > **Pré-condição**
 >
 > Conta existente e correntista não bloqueado.
@@ -82,8 +88,10 @@
 
 `15 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
+> **Arquivos:** `TransacaoController.java` (GET `/transacoes/{id}/editar`, POST `/transacoes/{id}`), `TransacaoService.java` (`editar`), `templates/transacao/form.html`.
+>
 > **Pré-condição**
 >
 > Existir transações na conta.
@@ -107,8 +115,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
+> **Arquivos:** `ComentarioCrudController.java` (GET/POST `/transacoes/{id}/comentario`), `ComentarioService.java` (`criar`), `templates/comentario/form.html`.
+>
 > **Pré-condição**
 >
 > Existir transações na conta.
@@ -132,8 +142,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
+> **Arquivos:** `ComentarioCrudController.java` (GET `/comentarios/{id}/editar`, POST `/comentarios/{id}` e `/comentarios/{id}/excluir`), `ComentarioService.java` (`editar`/`excluir`), `templates/comentario/form.html`.
+>
 > **Pré-condição**
 >
 > Comentário existe para uma transação.
@@ -160,8 +172,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Athena22
 
+> **Arquivos:** `CorrentistaController.java` (`listar`, GET `/correntistas`), `CorrentistaService.java` (`listarTodos`), `templates/correntista/list.html`, `AuthInterceptor.java` (restringe acesso a ADMINISTRADOR)
+>
 > **Pré-condição**
 >
 > Estar autenticado no sistema (login).
@@ -178,8 +192,10 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Athena22
 
+> **Arquivos:** `CorrentistaController.java` (form/criar, `/correntistas/nova`), `CorrentistaService.java` (criar), `CorrentistaForm.java`, `templates/correntista/form.html`
+>
 > **Pré-condição**
 >
 > Nenhuma.

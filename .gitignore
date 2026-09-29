@@ -12,6 +12,7 @@
 app/**/build/
 app/**/.gradle/
 app/**/out/
+app/bin/
 !app/gradle/wrapper/gradle-wrapper.jar
 *.class
 *.jar
