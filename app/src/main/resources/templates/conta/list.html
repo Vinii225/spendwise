@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Minhas Contas</title>
+</head>
+
+<body>
+
+<h1>Minhas Contas</h1>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Número</th>
+        <th>Descrição</th>
+        <th>Tipo</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr th:each="conta : ${contas}">
+        <td th:text="${conta.numero}"></td>
+        <td th:text="${conta.descricao}"></td>
+        <td>
+            <strong th:text="${conta.tipo}"></strong>
+        </td>
+
+        <td>
+            <a th:href="@{/contas/{contaId}/transacoes/nova(contaId=${conta.id})}">
+                Nova transação
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<p th:if="${#lists.isEmpty(contas)}">
+    Você ainda não possui contas cadastradas.
+</p>
+
+</body>
+
+</html>

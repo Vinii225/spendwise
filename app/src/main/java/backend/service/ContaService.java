@@ -8,6 +8,8 @@ import backend.model.TipoConta;
 import backend.repository.ContaRepository;
 import backend.repository.CorrentistaRepository;
 
+import java.util.List;
+
 @Service
 public class ContaService {
 
@@ -45,4 +47,10 @@ public class ContaService {
             throw new IllegalArgumentException("Dia de fechamento só é necessário para contas de tipo cartão.");
         }
     }
+
+    public List<Conta> listarPorCorrentista(Correntista correntista) {
+
+        return contaRepository.findByCorrentista(correntista);
+    }
+
 }

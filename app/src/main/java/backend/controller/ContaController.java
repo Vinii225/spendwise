@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.servlet.http.HttpSession;
+import backend.model.Correntista;
 
 import backend.dto.ContaForm;
 import backend.model.TipoConta;
@@ -50,4 +52,19 @@ public class ContaController {
         model.addAttribute("correntistas", correntistaRepository.findAll());
         model.addAttribute("tipos", TipoConta.values());
     }
+
+    @GetMapping
+    public String listar(HttpSession session, Model model) {
+
+        Correntista correntista =
+                (Correntista) session.getAttribute("usuario");
+
+        model.addAttribute(
+                "contas",
+                contaService.listarPorCorrentista(correntista)
+        );
+
+        return "conta/list";
+    }
+
 }
