@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Extrato da conta</title>
+</head>
+<body>
+    <h1 th:text="|Extrato: ${conta.descricao}|">Extrato da conta</h1>
+    <p>Número: <span th:text="${conta.numero}"></span></p>
+
+    <form th:action="@{/contas/{id}/extrato(id=${conta.id})}" method="get">
+        <label for="dataInicial">Data inicial</label>
+        <input id="dataInicial" name="dataInicial" type="date" th:value="${dataInicial}" required>
+        <label for="dataFinal">Data final</label>
+        <input id="dataFinal" name="dataFinal" type="date" th:value="${dataFinal}" required>
+        <button type="submit">Consultar período</button>
+    </form>
+
+    <p th:if="${erro}" th:text="${erro}" style="color: red"></p>
+    <p th:if="${#lists.isEmpty(transacoes)}">Não há transações no período informado.</p>
+
+    <table th:unless="${#lists.isEmpty(transacoes)}">
+        <thead>
+        <tr>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Movimento</th>
+            <th>Valor</th>
+            <th>Comentário</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transacao : ${transacoes}">
+            <td th:text="${transacao.data}"></td>
+            <td th:text="${transacao.descricao}"></td>
+            <td th:text="${transacao.categoria.nome}"></td>
+            <td th:text="${transacao.movimento}"></td>
+            <td th:text="${transacao.valor}"></td>
+            <td>
+                <a th:if="${comentarios.containsKey(transacao.id)}"
+                   th:href="@{/comentarios/{id}(id=${comentarios[transacao.id].id})}">Ver comentário</a>
+                <span th:unless="${comentarios.containsKey(transacao.id)}">-</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><a th:href="@{/contas}">Voltar para contas</a></p>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Contas</title>
+</head>
+<body>
+    <h1>Contas</h1>
+    <p th:if="${#lists.isEmpty(contas)}">Nenhuma conta cadastrada.</p>
+
+    <table th:unless="${#lists.isEmpty(contas)}">
+        <thead>
+        <tr>
+            <th>Número</th>
+            <th>Descrição</th>
+            <th>Tipo</th>
+            <th>Ação</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="conta : ${contas}">
+            <td th:text="${conta.numero}"></td>
+            <td th:text="${conta.descricao}"></td>
+            <td th:text="${conta.tipo}"></td>
+            <td><a th:href="@{/contas/{id}/extrato(id=${conta.id})}">Consultar extrato</a></td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comentário da transação</title>
+</head>
+<body>
+    <h1>Comentário da transação</h1>
+    <p th:text="${comentario.texto}"></p>
+    <a th:href="@{/contas/{id}/extrato(id=${comentario.transacao.conta.id})}">Voltar para o extrato</a>
+</body>
+</html>
