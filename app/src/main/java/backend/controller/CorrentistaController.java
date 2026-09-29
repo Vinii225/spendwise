@@ -35,9 +35,15 @@ public class CorrentistaController {
 
     @PostMapping
     public String criar(
-            @ModelAttribute("correntistaForm") CorrentistaForm form, RedirectAttributes redirectAttributes) {
+            @ModelAttribute("correntistaForm") CorrentistaForm form, Model model,
+            RedirectAttributes redirectAttributes) {
 
-        correntistaService.criar(form);
+        try {
+            correntistaService.criar(form);
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("erro", e.getMessage());
+            return "correntista/form";
+        }
 
         redirectAttributes.addFlashAttribute(
                 "sucesso",

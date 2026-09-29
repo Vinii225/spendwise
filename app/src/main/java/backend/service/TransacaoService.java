@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import backend.dto.TransacaoForm;
 import backend.model.Categoria;
+import backend.model.Conta;
 import backend.model.Transacao;
 import backend.repository.CategoriaRepository;
 import backend.repository.TransacaoRepository;
@@ -30,6 +31,21 @@ public class TransacaoService {
         Categoria categoria = categoriaRepository.findById(form.getCategoriaId())
                 .orElseThrow(() -> new IllegalArgumentException("Categoria não foi encontrada."));
 
+        transacao.setData(form.getData());
+        transacao.setDescricao(form.getDescricao());
+        transacao.setValor(form.getValor());
+        transacao.setMovimento(form.getMovimento());
+        transacao.setCategoria(categoria);
+
+        return transacaoRepository.save(transacao);
+    }
+
+    public Transacao criar(Conta conta, TransacaoForm form) {
+        Categoria categoria = categoriaRepository.findById(form.getCategoriaId())
+                .orElseThrow(() -> new IllegalArgumentException("Categoria não foi encontrada."));
+
+        Transacao transacao = new Transacao();
+        transacao.setConta(conta);
         transacao.setData(form.getData());
         transacao.setDescricao(form.getDescricao());
         transacao.setValor(form.getValor());

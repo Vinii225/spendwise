@@ -22,6 +22,9 @@ public class CorrentistaService {
     }
 
     public Correntista criar(CorrentistaForm form) {
+        if (correntistaRepository.existsByLogin(form.getLogin())) {
+            throw new IllegalArgumentException("Este login já está cadastrado.");
+        }
 
         Correntista correntista = new Correntista();
 

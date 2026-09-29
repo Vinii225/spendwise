@@ -10,10 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import backend.dto.TransacaoForm;
+import backend.model.Correntista;
 import backend.model.Movimento;
+import backend.model.Papel;
 import backend.model.Transacao;
 import backend.repository.CategoriaRepository;
 import backend.service.TransacaoService;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.web.server.ResponseStatusException;
+
+import static org.springframework.http.HttpStatus.FORBIDDEN;
 
 @Controller
 @RequestMapping("/transacoes")
@@ -29,8 +35,9 @@ public class TransacaoController {
     }
 
     @GetMapping("/{id}/editar")
-    public String formularioEdicao(@PathVariable Long id, Model model) {
+    public String formularioEdicao(@PathVariable Long id, HttpSession session, Model model) {
         Transacao transacao = transacaoService.buscarPorId(id);
+        validarAcesso(transacao, session);
         TransacaoForm form = new TransacaoForm();
         form.setData(transacao.getData());
         form.setDescricao(transacao.getDescricao());
@@ -47,9 +54,10 @@ public class TransacaoController {
     @PostMapping("/{id}")
     public String editar(@PathVariable Long id,
             @ModelAttribute("transacaoForm") TransacaoForm form,
-            Model model,
+            HttpSession session, Model model,
             RedirectAttributes redirectAttributes) {
         try {
+            validarAcesso(transacaoService.buscarPorId(id), session);
             transacaoService.editar(id, form);
             redirectAttributes.addFlashAttribute("sucesso", "Transação editada com sucesso.");
             return "redirect:/transacoes/" + id + "/editar";
@@ -64,5 +72,14 @@ public class TransacaoController {
     private void adicionarListas(Model model) {
         model.addAttribute("categorias", categoriaRepository.findAll());
         model.addAttribute("movimentos", Movimento.values());
+    }
+
+    private void validarAcesso(Transacao transacao, HttpSession session) {
+        Correntista usuario = (Correntista) session.getAttribute("usuario");
+        if (usuario.isBloqueado()
+                || (usuario.getPapel() != Papel.ADMINISTRADOR
+                && !transacao.getConta().getCorrentista().getId().equals(usuario.getId()))) {
+            throw new ResponseStatusException(FORBIDDEN, "Acesso negado.");
+        }
     }
 }

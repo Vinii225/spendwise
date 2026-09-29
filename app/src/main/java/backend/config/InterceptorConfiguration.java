@@ -23,6 +23,8 @@ public class InterceptorConfiguration implements WebMvcConfigurer {
                 .excludePathPatterns(
                         "/auth",
                         "/auth/**",
+                        "/cadastro",
+                        "/cadastro/**",
                         "/css/**",
                         "/js/**",
                         "/imagens/**",
