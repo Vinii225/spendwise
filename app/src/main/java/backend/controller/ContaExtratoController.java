@@ -24,6 +24,7 @@ import org.springframework.data.web.PageableDefault;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
@@ -39,6 +40,8 @@ public class ContaExtratoController {
     private final ContaRepository contaRepository;
     private final TransacaoRepository transacaoRepository;
     private final ComentarioRepository comentarioRepository;
+
+    private static final DateTimeFormatter FORMATO_BR = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public ContaExtratoController(ContaRepository contaRepository,
             TransacaoRepository transacaoRepository,
@@ -67,9 +70,9 @@ public class ContaExtratoController {
 
     @GetMapping("/{id}/extrato")
     public String extrato(@PathVariable Long id,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy")
             LocalDate dataInicial,
-            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+            @RequestParam(required = false) @DateTimeFormat(pattern = "dd/MM/yyyy")
             LocalDate dataFinal,
             HttpSession session, Model model) {
         Conta conta = contaRepository.findById(id)
@@ -83,8 +86,8 @@ public class ContaExtratoController {
         }
 
         model.addAttribute("conta", conta);
-        model.addAttribute("dataInicial", dataInicial);
-        model.addAttribute("dataFinal", dataFinal);
+        model.addAttribute("dataInicial", dataInicial == null ? null : dataInicial.format(FORMATO_BR));
+        model.addAttribute("dataFinal", dataFinal == null ? null : dataFinal.format(FORMATO_BR));
 
         if (dataInicial == null || dataFinal == null || dataInicial.isAfter(dataFinal)) {
             model.addAttribute("erro", "Informe uma data inicial e uma data final válidas.");
