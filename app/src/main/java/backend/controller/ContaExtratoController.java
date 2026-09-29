@@ -52,7 +52,7 @@ public class ContaExtratoController {
     }
 
     @GetMapping
-        public String listarContas(@PageableDefault(size = 10, sort = "id") Pageable pageable,
+        public String listarContas(@PageableDefault(size = 9, sort = "id") Pageable pageable,
             Model model, HttpSession session) {
         Correntista usuario = usuarioDaSessao(session);
         Pageable paginaLimitada = limitarPagina(pageable);

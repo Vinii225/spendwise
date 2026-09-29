@@ -26,7 +26,7 @@ public class CorrentistaController {
     }
 
     @GetMapping
-    public String listar(@PageableDefault(size = 10, sort = "id") Pageable pageable, Model model) {
+    public String listar(@PageableDefault(size = 9, sort = "id") Pageable pageable, Model model) {
         Pageable paginaLimitada = limitarPagina(pageable);
         model.addAttribute("correntistas", correntistaService.listarTodos(paginaLimitada));
         return "correntista/list";
