@@ -7,8 +7,7 @@
         <div class="flex flex-wrap items-center gap-2 text-sm font-medium">
             <a th:href="@{/}" class="rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100">Início</a>
             <a th:href="@{/contas}" class="rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100">Contas</a>
-            <a th:if="${session.usuario != null and session.usuario.papel.name() == 'ADMINISTRADOR'}"
-               th:href="@{/contas/nova}"
+            <a th:href="@{/contas/nova}"
                class="rounded-lg px-3 py-2 text-slate-600 hover:bg-slate-100">Nova conta</a>
             <a th:if="${session.usuario != null and session.usuario.papel.name() == 'ADMINISTRADOR'}"
                th:href="@{/correntistas}"
