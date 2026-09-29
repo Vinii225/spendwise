@@ -2,6 +2,7 @@ package backend.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -49,4 +50,8 @@ public class Transacao {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
+
+    public String getDataFormatada() {
+        return data.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
 }

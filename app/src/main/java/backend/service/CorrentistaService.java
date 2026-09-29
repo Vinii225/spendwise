@@ -5,8 +5,8 @@ import backend.repository.CorrentistaRepository;
 import org.springframework.stereotype.Service;
 import backend.dto.CorrentistaForm;
 import backend.model.Papel;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class CorrentistaService {
@@ -17,11 +17,14 @@ public class CorrentistaService {
         this.correntistaRepository = correntistaRepository;
     }
 
-    public List<Correntista> listarTodos() {
-        return correntistaRepository.findAll();
+    public Page<Correntista> listarTodos(Pageable pageable) {
+        return correntistaRepository.findAll(pageable);
     }
 
     public Correntista criar(CorrentistaForm form) {
+        if (correntistaRepository.existsByLogin(form.getLogin())) {
+            throw new IllegalArgumentException("Este login já está cadastrado.");
+        }
 
         Correntista correntista = new Correntista();
 

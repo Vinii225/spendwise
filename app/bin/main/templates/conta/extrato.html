@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extrato | SpendWise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900">
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+    <main class="mx-auto max-w-6xl px-6 py-10">
+    <a th:href="@{/contas}" class="text-sm font-semibold text-cyan-700">← Voltar para contas</a>
+    <div class="mt-4 flex flex-wrap items-end justify-between gap-4"><div><h1 class="text-3xl font-bold" th:text="|Extrato: ${conta.descricao}|">Extrato da conta</h1>
+    <p class="mt-2 text-slate-500">Número: <span th:text="${conta.numero}"></span></p></div><a th:href="@{/transacoes/nova(contaId=${conta.id})}" class="rounded-lg bg-cyan-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700">Nova transação</a></div>
+
+    <form th:action="@{/contas/{id}/extrato(id=${conta.id})}" method="get" class="mt-8 grid gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-[1fr_1fr_auto] sm:items-end">
+        <div><label for="dataInicial" class="mb-1 block text-sm font-medium">Data inicial</label><input id="dataInicial" name="dataInicial" type="date" th:value="${dataInicial}" required class="w-full rounded-lg border border-slate-300 px-3 py-2.5"></div>
+        <div><label for="dataFinal" class="mb-1 block text-sm font-medium">Data final</label><input id="dataFinal" name="dataFinal" type="date" th:value="${dataFinal}" required class="w-full rounded-lg border border-slate-300 px-3 py-2.5"></div>
+        <button type="submit" class="rounded-lg bg-slate-900 px-4 py-2.5 font-semibold text-white hover:bg-slate-700">Filtrar extrato</button>
+    </form>
+
+    <p th:if="${sucesso}" th:text="${sucesso}" class="mt-5 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700"></p>
+    <p th:if="${erro}" th:text="${erro}" class="mt-5 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700"></p>
+    <div th:if="${#lists.isEmpty(transacoes)}" class="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center"><p class="text-lg font-semibold">Nenhuma transação no período</p><p class="mt-2 text-sm text-slate-500">Altere as datas ou cadastre transações para visualizar o extrato.</p></div>
+
+    <div th:unless="${#lists.isEmpty(transacoes)}" class="mt-8 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"><table class="min-w-full text-left text-sm">
+        <thead class="bg-slate-100 text-xs uppercase tracking-wide text-slate-500">
+        <tr>
+            <th>Data</th>
+            <th>Descrição</th>
+            <th>Categoria</th>
+            <th>Movimento</th>
+            <th>Valor</th>
+            <th>Comentário</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="transacao : ${transacoes}">
+            <td class="px-5 py-4" th:text="${transacao.data}"></td>
+            <td class="px-5 py-4 font-medium" th:text="${transacao.descricao}"></td>
+            <td class="px-5 py-4 text-slate-600" th:text="${transacao.categoria.nome}"></td>
+            <td class="px-5 py-4" th:text="${transacao.movimento}"></td>
+            <td class="px-5 py-4 font-semibold" th:text="${transacao.valor}"></td>
+            <td>
+                <a th:if="${comentarios.containsKey(transacao.id)}"
+                         th:href="@{/comentarios/{id}(id=${comentarios[transacao.id].id})}" class="font-semibold text-cyan-700">Ver comentário</a>
+                     <span th:unless="${comentarios.containsKey(transacao.id)}" class="text-slate-400">Sem comentário</span>
+            </td>
+            <td class="space-x-3 whitespace-nowrap px-5 py-4">
+                <a th:href="@{/transacoes/{id}/editar(id=${transacao.id})}" class="font-semibold text-slate-700">Editar</a>
+                <a th:if="${comentarios.containsKey(transacao.id)}" th:href="@{/comentarios/{id}/editar(id=${comentarios[transacao.id].id})}" class="font-semibold text-cyan-700">Editar comentário</a>
+                <a th:unless="${comentarios.containsKey(transacao.id)}" th:href="@{/transacoes/{id}/comentario(id=${transacao.id})}" class="font-semibold text-cyan-700">Adicionar comentário</a>
+            </td>
+        </tr>
+        </tbody>
+    </table></div>
+    </main>
+</body>
+</html>

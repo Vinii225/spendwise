@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface CorrentistaRepository extends JpaRepository<Correntista, Long> {
     Optional<Correntista> findByLogin(String login);
+
+    boolean existsByLogin(String login);
 }

@@ -38,9 +38,9 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
-> **Arquivos:** nenhum — `ContaController.java` só tem `GET /contas/nova` e `POST /contas` (criação); `ContaRepository.java` sem métodos de busca; não há endpoint de listagem nem template além de `conta/form.html`.
+> **Arquivos:** `ContaExtratoController.java` (`listarContas`, GET `/contas`, com paginação), `templates/conta/list.html`.
 >
 > **Pré-condição**
 >
@@ -62,9 +62,9 @@
 
 `15 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
-> **Arquivos:** nenhum — `Transacao.java` (entidade) e `TransacaoRepository.java` existem, mas não há `TransacaoController`, service nem template.
+> **Arquivos:** `TransacaoCriacaoController.java` (GET `/transacoes/nova`, POST `/transacoes`), `TransacaoService.java` (`criar`), `templates/transacao/nova.html`.
 >
 > **Pré-condição**
 >
@@ -88,9 +88,9 @@
 
 `15 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
-> **Arquivos:** nenhum — depende da mesma infraestrutura de transações do UC03, ainda não implementada.
+> **Arquivos:** `TransacaoController.java` (GET `/transacoes/{id}/editar`, POST `/transacoes/{id}`), `TransacaoService.java` (`editar`), `templates/transacao/form.html`.
 >
 > **Pré-condição**
 >
@@ -115,9 +115,9 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
-> **Arquivos:** nenhum — `Comentario.java` (entidade) e `ComentarioRepository.java` existem, mas não há controller, service nem template.
+> **Arquivos:** `ComentarioCrudController.java` (GET/POST `/transacoes/{id}/comentario`), `ComentarioService.java` (`criar`), `templates/comentario/form.html`.
 >
 > **Pré-condição**
 >
@@ -142,9 +142,9 @@
 
 `10 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
-> **Arquivos:** nenhum — mesma limitação do UC05 (sem controller/service/template de comentário).
+> **Arquivos:** `ComentarioCrudController.java` (GET `/comentarios/{id}/editar`, POST `/comentarios/{id}` e `/comentarios/{id}/excluir`), `ComentarioService.java` (`editar`/`excluir`), `templates/comentario/form.html`.
 >
 > **Pré-condição**
 >
