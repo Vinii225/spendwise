@@ -12,9 +12,9 @@
 
 `15 pts`
 
-- [ ] Concluído — Responsável: ____________
+- [x] Concluído — Responsável: Luana Gabriella
 
-> **Arquivos:** nenhum — não há nenhuma referência a "extrato" no código-fonte.
+> **Arquivos:** `ContaExtratoController.java` (GET `/contas/{id}/extrato`, filtro por data inicial/final, default mês corrente), `templates/conta/extrato.html` (tabela com destaque/link para comentário).
 >
 > **Pré-condição**
 >
@@ -178,3 +178,10 @@
 > **Pós-condição**
 >
 > Correntista bloqueado não pode mais usar o sistema.
+
+## Requisitos não funcionais
+
+- **RNF 05 (PRG):** ✅ implementado — todo POST bem-sucedido devolve `redirect:` (ver `AuthController`, `CadastroController`, `ContaController`, `CorrentistaController`, `TransacaoCriacaoController`, `TransacaoController`, `ComentarioCrudController`).
+- **RNF 07 (paginação):** ✅ implementado — `ContaExtratoController.listarContas` e `CorrentistaController.listar` usam `Pageable`, refletindo no banco; testado em `PaginationTest.java`.
+- **RNF 08 (autenticação):** ❌ não implementado — `CorrentistaService.autenticar` compara a senha em texto puro (`correntista.getSenha().equals(senha)`, sem hash). A coluna já é `varchar(255)` pra comportar um hash, mas nenhum algoritmo (BCrypt etc.) é aplicado nem no cadastro nem no login.
+- **RNF 09 (autorização):** ⚠️ parcial — o controle de acesso funciona (via `AuthInterceptor` + checagens `validarAcesso` nos controllers de conta/transação/comentário), mas não usa o Spring Security pra isso: `SecurityConfig.java` libera `anyRequest().permitAll()` e desabilita CSRF, então toda a autorização é manual, fora do filtro de segurança.
