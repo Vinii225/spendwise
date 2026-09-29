@@ -17,6 +17,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -45,13 +49,20 @@ public class ContaExtratoController {
     }
 
     @GetMapping
-    public String listarContas(Model model, HttpSession session) {
+        public String listarContas(@PageableDefault(size = 10, sort = "id") Pageable pageable,
+            Model model, HttpSession session) {
         Correntista usuario = usuarioDaSessao(session);
+        Pageable paginaLimitada = limitarPagina(pageable);
         var contas = usuario.getPapel() == Papel.ADMINISTRADOR
-                ? contaRepository.findAll()
-                : contaRepository.findByCorrentistaId(usuario.getId());
+                ? contaRepository.findAll(paginaLimitada)
+                : contaRepository.findByCorrentistaId(usuario.getId(), paginaLimitada);
         model.addAttribute("contas", contas);
         return "conta/list";
+    }
+
+    private Pageable limitarPagina(Pageable pageable) {
+        return PageRequest.of(pageable.getPageNumber(), Math.min(pageable.getPageSize(), 50),
+                Sort.by(Sort.Direction.ASC, "id"));
     }
 
     @GetMapping("/{id}/extrato")
