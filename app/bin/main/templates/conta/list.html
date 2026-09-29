@@ -2,29 +2,21 @@
 <html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Contas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contas | SpendWise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <h1>Contas</h1>
-    <p th:if="${#lists.isEmpty(contas)}">Nenhuma conta cadastrada.</p>
-
-    <table th:unless="${#lists.isEmpty(contas)}">
-        <thead>
-        <tr>
-            <th>Número</th>
-            <th>Descrição</th>
-            <th>Tipo</th>
-            <th>Ação</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="conta : ${contas}">
-            <td th:text="${conta.numero}"></td>
-            <td th:text="${conta.descricao}"></td>
-            <td th:text="${conta.tipo}"></td>
-            <td><a th:href="@{/contas/{id}/extrato(id=${conta.id})}">Consultar extrato</a></td>
-        </tr>
-        </tbody>
-    </table>
+<body class="min-h-screen bg-slate-50 text-slate-900">
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="mx-auto max-w-6xl px-6 py-10">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+        <div><p class="text-sm font-semibold text-cyan-700">Visão financeira</p><h1 class="mt-1 text-3xl font-bold">Contas</h1><p class="mt-2 text-slate-500">Escolha uma conta para consultar o extrato.</p></div>
+        <a th:if="${session.usuario != null and session.usuario.papel.name() == 'ADMINISTRADOR'}" th:href="@{/contas/nova}" class="rounded-lg bg-cyan-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700">Nova conta</a>
+    </div>
+    <div th:if="${#lists.isEmpty(contas)}" class="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center"><p class="text-lg font-semibold">Nenhuma conta cadastrada</p><p class="mt-2 text-sm text-slate-500">Um administrador precisa cadastrar uma conta para iniciar.</p><a th:if="${session.usuario != null and session.usuario.papel.name() == 'ADMINISTRADOR'}" th:href="@{/contas/nova}" class="mt-5 inline-block rounded-lg bg-cyan-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700">Cadastrar primeira conta</a></div>
+    <div th:unless="${#lists.isEmpty(contas)}" class="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <article th:each="conta : ${contas}" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"><div class="flex items-start justify-between gap-3"><div><p class="text-xs font-semibold uppercase tracking-wide text-slate-400" th:text="${conta.tipo}"></p><h2 class="mt-2 text-xl font-bold" th:text="${conta.descricao}"></h2></div><span class="rounded-full bg-cyan-50 px-3 py-1 text-xs font-semibold text-cyan-700" th:text="${conta.numero}"></span></div><a th:href="@{/contas/{id}/extrato(id=${conta.id})}" class="mt-6 block rounded-lg bg-slate-900 px-4 py-2.5 text-center text-sm font-semibold text-white hover:bg-slate-700">Abrir extrato</a></article>
+    </div>
+</main>
 </body>
 </html>

@@ -3,40 +3,26 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Correntistas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correntistas | SpendWise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body>
-
-<h1>Lista de Correntistas</h1>
-
-<a th:href="@{/correntistas/nova}">
-    Cadastrar novo correntista
-</a>
-
-<br><br>
-
-<table>
-    <thead>
-    <tr>
-        <th>Nome</th>
-        <th>Login</th>
-        <th>Papel</th>
-        <th>Bloqueado</th>
-    </tr>
-    </thead>
-
-    <tbody>
-
-    <tr th:each="correntista : ${correntistas}">
-        <td th:text="${correntista.nome}"></td>
-        <td th:text="${correntista.login}"></td>
-        <td th:text="${correntista.papel}"></td>
-        <td th:text="${correntista.bloqueado}"></td>
-    </tr>
-
-    </tbody>
-</table>
-
+<body class="min-h-screen bg-slate-50 text-slate-900">
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<main class="mx-auto max-w-6xl px-6 py-10">
+    <div class="flex flex-wrap items-end justify-between gap-4">
+        <div><p class="text-sm font-semibold text-cyan-700">Administração</p><h1 class="mt-1 text-3xl font-bold">Correntistas</h1></div>
+        <a th:href="@{/correntistas/nova}" class="rounded-lg bg-cyan-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700">Novo correntista</a>
+    </div>
+    <div class="mt-8 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <table class="min-w-full text-left text-sm">
+            <thead class="bg-slate-100 text-xs uppercase tracking-wide text-slate-500"><tr><th class="px-5 py-3">Nome</th><th class="px-5 py-3">Login</th><th class="px-5 py-3">Papel</th><th class="px-5 py-3">Status</th></tr></thead>
+            <tbody class="divide-y divide-slate-100">
+            <tr th:each="correntista : ${correntistas}" class="hover:bg-slate-50"><td class="px-5 py-4 font-medium" th:text="${correntista.nome}"></td><td class="px-5 py-4 text-slate-600" th:text="${correntista.login}"></td><td class="px-5 py-4 text-slate-600" th:text="${correntista.papel}"></td><td class="px-5 py-4 text-slate-600" th:text="${correntista.bloqueado ? 'Bloqueado' : 'Ativo'}"></td></tr>
+            </tbody>
+        </table>
+    </div>
+</main>
 </body>
 </html>
