@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentários | SpendWise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900">
+    <div th:replace="~{fragments/navigation :: navigation}"></div>
+    <main class="mx-auto max-w-2xl px-6 py-10">
+        <a th:href="@{/contas/{id}/extrato(id=${transacao.conta.id})}" class="text-sm font-semibold text-cyan-700">← Voltar para o extrato</a>
+        <div class="mt-4 flex flex-wrap items-end justify-between gap-4">
+            <div>
+                <p class="text-sm font-semibold text-cyan-700">Comentários</p>
+                <h1 class="mt-1 text-3xl font-bold" th:text="${transacao.descricao}">Transação</h1>
+                <p class="mt-2 text-slate-500" th:text="${transacao.dataFormatada}"></p>
+            </div>
+            <a th:href="@{/transacoes/{id}/comentario(id=${transacao.id})}" class="rounded-lg bg-cyan-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-cyan-700">Adicionar comentário</a>
+        </div>
+
+        <div th:if="${#lists.isEmpty(comentarios)}" class="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center">
+            <p class="text-lg font-semibold">Nenhum comentário ainda</p>
+            <p class="mt-2 text-sm text-slate-500">Adicione o primeiro comentário desta transação.</p>
+        </div>
+
+        <ul th:unless="${#lists.isEmpty(comentarios)}" class="mt-8 space-y-4">
+            <li th:each="comentario : ${comentarios}" class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+                <p class="whitespace-pre-wrap leading-7 text-slate-700" th:text="${comentario.texto}"></p>
+                <div class="mt-4 flex gap-3 text-sm">
+                    <a th:href="@{/comentarios/{id}/editar(id=${comentario.id})}" class="font-semibold text-cyan-700">Editar</a>
+                    <form th:action="@{/comentarios/{id}/excluir(id=${comentario.id})}" method="post">
+                        <button type="submit" class="font-semibold text-red-700">Excluir</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>

@@ -56,13 +56,13 @@ Registro de um crédito ou débito em uma conta, associado a uma categoria.
 
 ## comentarios
 
-Comentário opcional associado a uma transação, usado para dar mais detalhes além da descrição e categoria.
+Comentário opcional associado a uma transação, usado para dar mais detalhes além da descrição e categoria. Uma transação pode ter vários comentários (1,N).
 
-| Campo        | Tipo   | Nulo? | Chave  | Descrição                                                                                                                       |
-| ------------ | ------ | ----- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| id           | bigint | Não   | PK     | Identificador único do comentário.                                                                                              |
-| texto        | text   | Não   |        | Texto do comentário (ex: "Recebido 1/3 da herança deixada pela Tia Cotinha para os sobrinhos").                                 |
-| transacao_id | bigint | Não   | FK, UQ | Referencia a transação comentada (`transacoes.id`). `UNIQUE` garante no máximo 1 comentário por transação. `ON DELETE CASCADE`. |
+| Campo        | Tipo   | Nulo? | Chave | Descrição                                                                                        |
+| ------------ | ------ | ----- | ----- | ------------------------------------------------------------------------------------------------- |
+| id           | bigint | Não   | PK    | Identificador único do comentário.                                                                |
+| texto        | text   | Não   |       | Texto do comentário (ex: "Recebido 1/3 da herança deixada pela Tia Cotinha para os sobrinhos").   |
+| transacao_id | bigint | Não   | FK    | Referencia a transação comentada (`transacoes.id`). Uma transação pode ter vários comentários. `ON DELETE CASCADE`. |
 
 ## Domínios (valores possíveis)
 

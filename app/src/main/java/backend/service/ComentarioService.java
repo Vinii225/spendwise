@@ -6,6 +6,8 @@ import backend.model.Transacao;
 import backend.repository.ComentarioRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ComentarioService {
 
@@ -15,15 +17,16 @@ public class ComentarioService {
         this.comentarioRepository = comentarioRepository;
     }
 
+    public List<Comentario> listarPorTransacao(Long transacaoId) {
+        return comentarioRepository.findByTransacaoIdOrderByIdAsc(transacaoId);
+    }
+
     public Comentario buscarPorId(Long id) {
         return comentarioRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Comentário não foi encontrado."));
     }
 
     public Comentario criar(Transacao transacao, ComentarioForm form) {
-        if (comentarioRepository.findByTransacaoId(transacao.getId()).isPresent()) {
-            throw new IllegalArgumentException("Esta transação já possui um comentário.");
-        }
         Comentario comentario = new Comentario();
         comentario.setTexto(form.getTexto());
         comentario.setTransacao(transacao);

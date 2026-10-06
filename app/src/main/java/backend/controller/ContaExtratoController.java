@@ -3,6 +3,7 @@ package backend.controller;
 import backend.model.Comentario;
 import backend.model.Conta;
 import backend.model.Correntista;
+import backend.model.Movimento;
 import backend.model.Papel;
 import backend.model.Transacao;
 import backend.repository.ComentarioRepository;
@@ -22,12 +23,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.FORBIDDEN;
@@ -93,19 +95,25 @@ public class ContaExtratoController {
             model.addAttribute("erro", "Informe uma data inicial e uma data final válidas.");
             model.addAttribute("transacoes", Collections.emptyList());
             model.addAttribute("comentarios", Collections.emptyMap());
+            model.addAttribute("saldo", BigDecimal.ZERO);
             return "conta/extrato";
         }
 
         var transacoes = transacaoRepository
                 .findByContaIdAndDataBetweenOrderByDataAscIdAsc(id, dataInicial, dataFinal);
         var ids = transacoes.stream().map(Transacao::getId).toList();
-        Map<Long, Comentario> comentarios = ids.isEmpty()
+        Map<Long, List<Comentario>> comentarios = ids.isEmpty()
                 ? Collections.emptyMap()
                 : comentarioRepository.findByTransacaoIdIn(ids).stream()
-                        .collect(Collectors.toMap(c -> c.getTransacao().getId(), Function.identity()));
+                        .collect(Collectors.groupingBy(c -> c.getTransacao().getId()));
+
+        BigDecimal saldo = transacoes.stream()
+                .map(t -> t.getMovimento() == Movimento.C ? t.getValor() : t.getValor().negate())
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         model.addAttribute("transacoes", transacoes);
         model.addAttribute("comentarios", comentarios);
+        model.addAttribute("saldo", saldo);
         return "conta/extrato";
     }
 

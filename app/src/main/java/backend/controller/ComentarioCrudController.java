@@ -32,6 +32,15 @@ public class ComentarioCrudController {
         this.transacaoRepository = transacaoRepository;
     }
 
+    @GetMapping("/transacoes/{id}/comentarios")
+    public String listar(@PathVariable Long id, HttpSession session, Model model) {
+        Transacao transacao = buscarTransacao(id);
+        validarAcesso(transacao, session);
+        model.addAttribute("transacao", transacao);
+        model.addAttribute("comentarios", comentarioService.listarPorTransacao(id));
+        return "comentario/list";
+    }
+
     @GetMapping("/transacoes/{id}/comentario")
     public String formularioCriacao(@PathVariable Long id, HttpSession session, Model model) {
         Transacao transacao = buscarTransacao(id);
@@ -49,7 +58,7 @@ public class ComentarioCrudController {
         try {
             comentarioService.criar(transacao, form);
             redirectAttributes.addFlashAttribute("sucesso", "Comentário adicionado com sucesso.");
-            return "redirect:/contas/" + transacao.getConta().getId() + "/extrato";
+            return "redirect:/transacoes/" + id + "/comentarios";
         } catch (IllegalArgumentException e) {
             model.addAttribute("erro", e.getMessage());
             model.addAttribute("transacao", transacao);
@@ -76,17 +85,17 @@ public class ComentarioCrudController {
         validarAcesso(comentario.getTransacao(), session);
         comentarioService.editar(id, form);
         redirectAttributes.addFlashAttribute("sucesso", "Comentário atualizado com sucesso.");
-        return "redirect:/contas/" + comentario.getTransacao().getConta().getId() + "/extrato";
+        return "redirect:/transacoes/" + comentario.getTransacao().getId() + "/comentarios";
     }
 
     @PostMapping("/comentarios/{id}/excluir")
     public String excluir(@PathVariable Long id, HttpSession session, RedirectAttributes redirectAttributes) {
         Comentario comentario = comentarioService.buscarPorId(id);
         validarAcesso(comentario.getTransacao(), session);
-        Long contaId = comentario.getTransacao().getConta().getId();
+        Long transacaoId = comentario.getTransacao().getId();
         comentarioService.excluir(id);
         redirectAttributes.addFlashAttribute("sucesso", "Comentário excluído com sucesso.");
-        return "redirect:/contas/" + contaId + "/extrato";
+        return "redirect:/transacoes/" + transacaoId + "/comentarios";
     }
 
     private Transacao buscarTransacao(Long id) {

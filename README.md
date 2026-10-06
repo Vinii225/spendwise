@@ -1,6 +1,6 @@
 # SpendWise – Controle Financeiro na Web
 
-Aplicação web para controle financeiro pessoal. Permite que o usuário registre transações (créditos e débitos) em contas-correntes e cartões de crédito, organizando-as por categorias, e acompanhe extratos e o orçamento anual por categoria.
+Aplicação web para controle financeiro pessoal. Permite que o usuário registre transações (créditos e débitos) em contas-correntes e cartões de crédito, organizando-as por categorias, e acompanhe extratos — com saldo do período e indicação visual de créditos e débitos — e o orçamento anual por categoria.
 
 Projeto desenvolvido para a disciplina **Programação para a Web II**, do curso de **TSI em Sistemas para a Internet**, Instituto Federal da Paraíba (IFPB), sob orientação do **Prof. Frederico Costa Guedes Pereira**.
 

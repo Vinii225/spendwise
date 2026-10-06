@@ -21,6 +21,14 @@
 
     <p th:if="${sucesso}" th:text="${sucesso}" class="mt-5 rounded-lg bg-emerald-50 px-4 py-3 text-sm text-emerald-700"></p>
     <p th:if="${erro}" th:text="${erro}" class="mt-5 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700"></p>
+
+    <div th:unless="${erro}" class="mt-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+        <p class="text-sm font-medium text-slate-500">Saldo do período</p>
+        <p class="mt-1 text-3xl font-bold"
+           th:text="|R$ ${#numbers.formatDecimal(saldo, 1, 2, 'COMMA')}|"
+           th:class="${saldo.signum() < 0} ? 'mt-1 text-3xl font-bold text-red-600' : 'mt-1 text-3xl font-bold text-emerald-600'"></p>
+    </div>
+
     <div th:if="${#lists.isEmpty(transacoes)}" class="mt-8 rounded-2xl border border-dashed border-slate-300 bg-white p-10 text-center"><p class="text-lg font-semibold">Nenhuma transação no período</p><p class="mt-2 text-sm text-slate-500">Altere as datas ou cadastre transações para visualizar o extrato.</p></div>
 
     <div th:unless="${#lists.isEmpty(transacoes)}" class="mt-8 overflow-x-auto rounded-2xl border border-slate-200 bg-white shadow-sm"><table class="min-w-full text-left text-sm">
@@ -41,16 +49,18 @@
             <td class="px-5 py-4 font-medium" th:text="${transacao.descricao}"></td>
             <td class="px-5 py-4 text-slate-600" th:text="${transacao.categoria.nome}"></td>
             <td class="px-5 py-4" th:text="${transacao.movimento}"></td>
-            <td class="px-5 py-4 font-semibold" th:text="${transacao.valor}"></td>
+            <td class="px-5 py-4 font-semibold"
+                th:text="|${transacao.movimento.name() == 'C' ? '+' : '-'} R$ ${#numbers.formatDecimal(transacao.valor, 1, 2, 'COMMA')}|"
+                th:class="${transacao.movimento.name() == 'C'} ? 'px-5 py-4 font-semibold text-emerald-600' : 'px-5 py-4 font-semibold text-red-600'"></td>
             <td class="px-5 py-4">
-                <a th:if="${comentarios.containsKey(transacao.id)}"
-                         th:href="@{/comentarios/{id}(id=${comentarios[transacao.id].id})}" class="font-semibold text-cyan-700">Ver comentário</a>
-                     <span th:unless="${comentarios.containsKey(transacao.id)}" class="text-slate-400">Sem comentário</span>
+                <a th:if="${not #lists.isEmpty(comentarios[transacao.id])}"
+                         th:href="@{/transacoes/{id}/comentarios(id=${transacao.id})}" class="font-semibold text-cyan-700"
+                         th:text="|Ver comentários (${#lists.size(comentarios[transacao.id])})|">Ver comentários</a>
+                     <span th:if="${#lists.isEmpty(comentarios[transacao.id])}" class="text-slate-400">Sem comentário</span>
             </td>
             <td class="space-x-3 whitespace-nowrap px-5 py-4">
                 <a th:href="@{/transacoes/{id}/editar(id=${transacao.id})}" class="font-semibold text-slate-700">Editar transação</a>
-                <a th:if="${comentarios.containsKey(transacao.id)}" th:href="@{/comentarios/{id}/editar(id=${comentarios[transacao.id].id})}" class="font-semibold text-cyan-700">Editar comentário</a>
-                <a th:unless="${comentarios.containsKey(transacao.id)}" th:href="@{/transacoes/{id}/comentario(id=${transacao.id})}" class="font-semibold text-cyan-700">Adicionar comentário</a>
+                <a th:href="@{/transacoes/{id}/comentario(id=${transacao.id})}" class="font-semibold text-cyan-700">Adicionar comentário</a>
             </td>
         </tr>
         </tbody>
