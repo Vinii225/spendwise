@@ -16,8 +16,8 @@ O escopo completo do projeto está no PDF original ([docs/projeto-spendwise.pdf]
 
 - [Requisitos funcionais e não funcionais](docs/requisitos-spendwise.pdf) — RF01–RF14 e RNF01–RNF09
 - Checklist de casos de uso, com responsável e status de cada um:
-  - [Etapa I](docs/etapa1/checklist-ucs-etapa1.md) — UC21, UC20 e UC01–UC06
-  - [Etapa II](docs/etapa2/checklist-ucs-etapa2.md) — UC23, UC22, UC24 e UC07–UC09
+  - [Etapa I](docs/etapa1/checklist-ucs-etapa1.md) — UC21, UC20 e UC01–UC06 (✅ concluída, nota 100/100)
+  - [Etapa II](docs/etapa2/checklist-ucs-etapa2.md) — UC23, UC22, UC24 e UC07–UC09 (🚧 em andamento, ~35/100 pts)
 - [Dicionário de dados](docs/db/dicionario-dados.md) — inclui os modelos ER e lógico do banco
 
 ## Estrutura do repositório

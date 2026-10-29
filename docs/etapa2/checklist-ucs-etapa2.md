@@ -4,6 +4,23 @@
 >
 > Pontuação da etapa (Cronograma): UC23 + UC22 + UC24 + UC07 + UC08 + RNF 05 + RNF 07 + RNF 08 + RNF 09 = **100 pts** (+ UC09 opcional = **115 pts**)
 
+## Status: 🚧 Em andamento — ~35/100 pts garantidos
+
+| Item | Pts | Status | O que falta |
+| --- | --- | --- | --- |
+| UC07 | 15 | ✅ Concluído | — |
+| RNF 05 (PRG) | 10 | ✅ Concluído | — |
+| RNF 07 (paginação) | 10 | ✅ Concluído | — |
+| RNF 09 (autorização) | 10 | ⚠️ Parcial | Migrar checagem manual (`AuthInterceptor`/`validarAcesso`) para Spring Security; `SecurityConfig` hoje libera `anyRequest().permitAll()` e desabilita CSRF |
+| UC24 | 10 | ⚠️ Parcial | Falta ação em `CorrentistaController`/`CorrentistaService` para o admin bloquear/desbloquear (campo e leitura já existem) |
+| RNF 08 (autenticação) | 10 | ❌ Não implementado | Aplicar hash (ex. BCrypt) em `CorrentistaService.autenticar` e no cadastro — hoje compara senha em texto puro |
+| UC22 | 10 | ❌ Não implementado | Criar `CategoriaController` + service + template de listagem (entidade/repository já existem) |
+| UC23 | 10 | ❌ Não implementado | Criar `CategoriaController` + service + template de cadastro/edição |
+| UC08 | 15 | ❌ Não implementado | Nenhum código de orçamento anual — criar controller/service/template (planilha categoria x mês) |
+| UC09 (opcional) | 15 | ❌ Não implementado | Depende do UC08; gráfico de linhas por categoria/mês |
+
+**Ordem sugerida:** UC22 → UC23 (mesma base, desbloqueia CRUD de categoria) → UC24 (ação de bloqueio, pouco esforço) → RNF 08 (hash de senha, pouco esforço, risco de segurança) → RNF 09 (migração para Spring Security) → UC08 (orçamento anual) → UC09 (opcional, bônus).
+
 ## Correntista
 
 ---

@@ -4,6 +4,10 @@
 >
 > Pontuação da etapa (Cronograma): UC21 + UC20 + UC01 a UC06 + RNF 07 (P-R-G) = **100 pts**
 
+## Status: ✅ Etapa concluída — Nota 100/100
+
+Todos os UCs da etapa (UC01–UC06, UC20, UC21) estão marcados como concluídos, e o RNF 07 (padrão PRG) está implementado — ver detalhamento em [`checklist-ucs-etapa2.md`](../etapa2/checklist-ucs-etapa2.md#requisitos-não-funcionais).
+
 ## Correntista
 
 ---
